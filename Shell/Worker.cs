@@ -22,9 +22,9 @@ namespace Shell
 
                 if (input != null)
                 {
-                    var command = new Command(input, null);
+                    var command = new Command(input, new List<string> { });
 
-                    _delegator.Delegate(command); 
+                    Console.WriteLine(_delegator.Delegate(command)); 
                 }
                 await Task.Delay(1000, stoppingToken);
             }

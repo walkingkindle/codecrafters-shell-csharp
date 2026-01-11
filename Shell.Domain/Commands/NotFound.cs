@@ -2,7 +2,7 @@
 
 namespace Shell.Domain.Commands
 {
-    public sealed record CommandNotFound(string commandName):CommandResolution;
+    public sealed record CommandNotFound(string CommandName):CommandResolution;
 
 
 }
