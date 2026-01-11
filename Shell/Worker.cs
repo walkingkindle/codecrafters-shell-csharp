@@ -18,6 +18,7 @@ namespace Shell
         {
             while (!stoppingToken.IsCancellationRequested)
             {
+                Console.Write("$ ");       
                 var input = Console.ReadLine();
 
                 if (input != null)
