@@ -6,10 +6,10 @@ namespace Shell.Tests.Presentation
 {
     public class OutputWriterTests
     {
-        private readonly OutputWriter _service;
+        private readonly ConsoleOutputSink _service;
         public OutputWriterTests()
         {
-            _service = new OutputWriter();
+            _service = new ConsoleOutputSink();
         }
 
         [Fact]

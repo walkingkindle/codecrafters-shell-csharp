@@ -12,10 +12,9 @@ namespace Shell.Application.Resolvers
             _handlers = handlers;
         }
 
-        public CommandResolution Resolve(Command command)
+        public ICommandHandler Resolve(Command command)
         {
-            var handler = _handlers.First(h => h.CanHandle(command));
-            return handler.Handle(command);
+            return _handlers.First(x => x.CanHandle(command));
         }
     }
 }

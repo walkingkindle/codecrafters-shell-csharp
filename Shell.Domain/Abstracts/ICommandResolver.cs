@@ -3,5 +3,5 @@
 namespace Shell.Domain.Abstracts;
 public interface ICommandResolver
 {
-    CommandResolution Resolve(Command command);
+    ICommandHandler Resolve(Command command);
 }

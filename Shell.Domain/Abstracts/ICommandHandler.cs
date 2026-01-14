@@ -5,6 +5,6 @@ namespace Shell.Domain.Abstracts
     public interface ICommandHandler
     {
         bool CanHandle(Command command);
-        CommandResolution Handle(Command command);
+        void Execute(Command command, ShellExecutionContext context);
     }
 }
