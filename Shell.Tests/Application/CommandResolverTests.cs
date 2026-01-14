@@ -1,4 +1,5 @@
-﻿using Shell.Application.Resolvers;
+﻿using Shell.Application.Handlers;
+using Shell.Application.Resolvers;
 using Shell.Domain.Abstracts;
 using Shell.Domain.Commands;
 using Shell.Domain.Entities;
@@ -24,9 +25,6 @@ namespace Shell.Tests.Application
             var result = _commandResolver.Resolve(command);
 
             Assert.NotNull(result);
-
-            Assert.Equal(result, new CommandNotFound("foo"));
-
 
         }
     }

@@ -28,9 +28,7 @@ namespace Shell
                 var input = Console.ReadLine();
                 if (input != null)
                 {
-                    var command = new Command(input, new List<string> { });
-
-                    _delegator.Delegate(command, context); 
+                    _delegator.Delegate(input, context); 
                 }
             }
         }

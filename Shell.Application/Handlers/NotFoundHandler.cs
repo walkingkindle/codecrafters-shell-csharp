@@ -9,5 +9,5 @@ public class NotFoundHandler : ICommandHandler
     public bool CanHandle(Command command) => true;
 
     public void Execute(Command command, ShellExecutionContext context) => 
-        context.Emit($"{command.Name}: command not found");
+        context.Emit($"{command.Input}: command not found");
 }

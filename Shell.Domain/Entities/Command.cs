@@ -3,11 +3,11 @@
 
     public sealed record Command
     {
-        public string Name { get; set;  }
+        public string Input { get; set; }
         public IReadOnlyList<string> Arguments { get; set;  }
-        public Command(string name, IReadOnlyList<string> arguments)
+        public Command(string input, IReadOnlyList<string> arguments)
         {
-            Name = name;
+            Input = input;
             Arguments = arguments.ToList();
         }
 
