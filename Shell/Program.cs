@@ -5,6 +5,7 @@ using Shell.Domain.Abstracts;
 using Shell.Output;
 
 var builder = Host.CreateApplicationBuilder(args);
+builder.Logging.ClearProviders();
 builder.Services.AddHostedService<Worker>();
 builder.Services.AddSingleton<ICommandResolver, CommandResolver>();
 builder.Services.AddSingleton<ICommandHandler, NotFoundHandler>();
