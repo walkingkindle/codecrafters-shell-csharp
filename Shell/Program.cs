@@ -1,16 +1,32 @@
 using Shell;
-using Shell.Application.Output;
+using Shell.Application;
+using Shell.Application.Handlers;
 using Shell.Application.Resolvers;
 using Shell.Domain.Abstracts;
 using Shell.Output;
 
 var builder = Host.CreateApplicationBuilder(args);
 builder.Logging.ClearProviders();
-builder.Services.AddHostedService<Worker>();
 builder.Services.AddSingleton<ICommandResolver, CommandResolver>();
-builder.Services.AddSingleton<ICommandHandler, NotFoundHandler>();
-builder.Services.AddSingleton<IOutputWriter, OutputWriter>();
+
+AddHandlers(builder.Services);
+builder.Services.AddSingleton<IOutputSink, ConsoleOutputSink>();
 builder.Services.AddSingleton<Delegator>();
+builder.Services.AddSingleton<IShellRunner, ShellRunner>();
+
 
 var host = builder.Build();
-host.Run();
+var shell = host.Services.GetRequiredService<IShellRunner>();
+
+shell.Run();
+
+static void AddHandlers(IServiceCollection services)
+{
+    services.AddSingleton<ICommandHandler, ExitHandler>();
+    //Register other handlers here yo
+
+
+
+    //Not found is the last one.
+    services.AddSingleton<ICommandHandler, NotFoundHandler>();
+}

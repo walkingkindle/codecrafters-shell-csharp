@@ -1,5 +1,4 @@
-﻿using Shell.Application.Output;
-using Shell.Domain.Abstracts;
+﻿using Shell.Domain.Abstracts;
 using Shell.Domain.Commands;
 using Shell.Domain.Concepts;
 using Shell.Domain.Entities;
@@ -9,19 +8,17 @@ namespace Shell
     public class Delegator
     {
         private readonly ICommandResolver _resolver;
-        private readonly IOutputWriter _writer;
 
-        public Delegator(ICommandResolver resolver, IOutputWriter writer)
+        public Delegator(ICommandResolver resolver)
         {
             _resolver = resolver;
-            _writer = writer;
         }
 
-        public string Delegate(Command command)
+        public void Delegate(Command command, ShellExecutionContext context)
         {
-            var resolution = _resolver.Resolve(command);
+            var commandHandler = _resolver.Resolve(command);
 
-            return _writer.WriteOutput(resolution);
+            commandHandler.Execute(command, context);
         }
     }
 }
