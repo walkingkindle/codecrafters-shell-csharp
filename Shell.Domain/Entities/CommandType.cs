@@ -2,5 +2,6 @@
 public enum CommandType
 {
     BuiltIn,
-    External
+    External,
+    NotFound
 };
