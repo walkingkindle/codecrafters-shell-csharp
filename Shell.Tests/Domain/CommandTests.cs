@@ -11,7 +11,7 @@ namespace Shell.Tests.Domain
             var args = new List<string> { "arg1", "arg2" };
             var command = new Command("test", args);
 
-            Assert.Equal("test", command.Name);
+            Assert.Equal("test", command.Input);
             Assert.Equal(args, command.Arguments);
         }
 
