@@ -19,7 +19,7 @@ namespace Shell.Application.Handlers
             //.Concat(command.Arguments)
             //.ToArray();
 
-            _starter.Start(path, command.Arguments.ToArray());
+            _starter.Start(Path.GetFileName(path), command.Arguments.ToArray());
             
         }
     }
