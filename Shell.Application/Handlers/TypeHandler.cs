@@ -1,9 +1,10 @@
 ﻿using Shell.Domain.Abstracts;
 using Shell.Domain.Entities;
+using Shell.Infrastructure;
 
 namespace Shell.Application.Handlers
 {
-    public class TypeHandler(ICommandClassifier _classifier) : ICommandHandler
+    public class TypeHandler(ICommandClassifier _classifier, IExternalDiscoveryService _externalDiscoveryService, IPermissionService _permissionService) : ICommandHandler
     {
         public bool CanHandle(Command command) =>
             command.Input.Equals("type", StringComparison.OrdinalIgnoreCase);
@@ -15,8 +16,34 @@ namespace Shell.Application.Handlers
 
             if (type == CommandType.BuiltIn)
                 context.Emit($"{commandName} is a shell builtin");
+            else if (type == CommandType.External)
+                HandleExternalCommand(commandName, context);
             else
-                context.Emit($"{commandName}: not found");
+                CommandNotFound(commandName, context);
+        }
+
+        private void HandleExternalCommand(string commandName, ShellExecutionContext context)
+        {
+            var paths = _externalDiscoveryService.Get(commandName);
+
+            if (paths == null || paths.Length == 0)
+            {
+                CommandNotFound(commandName, context);
+                return;
+            }
+
+            foreach(var command in paths)
+            {
+                if (_permissionService.HasExecutePermission(command))
+                    context.Emit($"{commandName} is {command}");
+                else
+                    CommandNotFound(commandName, context);
+            }
+        }
+
+        private static void CommandNotFound(string commandName, ShellExecutionContext context)
+        {
+            context.Emit($"{commandName}: not found");
         }
     }
 }

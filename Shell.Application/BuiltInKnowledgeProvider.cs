@@ -11,6 +11,5 @@ namespace Shell.Application
         }
 
         public bool Exists(string name) => _builtInCommands.Any(c => c.Name == name);
-
     }
 }

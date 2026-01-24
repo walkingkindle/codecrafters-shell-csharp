@@ -1,20 +1,15 @@
 using Shell.Application;
-using Shell.Domain;
 using Shell.Domain.Abstracts;
-using Shell.Domain.Entities;
-using Shell.Output;
 
 namespace Shell
 {
     public class ShellRunner : IShellRunner
     {
-        private readonly ILogger<ShellRunner> _logger;
         private readonly Delegator _delegator;
         private readonly IOutputSink _outputSink;
 
-        public ShellRunner(ILogger<ShellRunner> logger, Delegator delegator, IOutputSink outputSink)
+        public ShellRunner(Delegator delegator, IOutputSink outputSink)
         {
-            _logger = logger;
             _delegator = delegator;
             _outputSink = outputSink;
         }
