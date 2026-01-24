@@ -36,6 +36,7 @@ builder.Services.AddSingleton<IExternalDiscoveryService,ExternalDiscoveryService
 builder.Services.AddSingleton<ExternalKnowledgeProvider>();
 builder.Services.AddSingleton<IShellRunner, ShellRunner>();
 builder.Services.AddTransient<EnvironmentVariableParser>();
+builder.Services.AddSingleton<ProcessStarter>();
 
 
 Dictionary<string,string> arguments = ResolveArguments(args);
@@ -50,6 +51,7 @@ static void AddHandlers(IServiceCollection services)
     services.AddSingleton<ICommandHandler, ExitHandler>();
     services.AddSingleton<ICommandHandler, EchoHandler>();
     services.AddSingleton<ICommandHandler, TypeHandler>();
+    services.AddSingleton<ICommandHandler,ExternalExecutionHandler>();
     //Register other handlers here yo
 
 

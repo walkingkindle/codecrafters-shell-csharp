@@ -4,6 +4,8 @@ namespace Shell.Infrastructure
 {
     public class ExternalDiscoveryService : IExternalDiscoveryService
     {
+        public bool Exists(string input) => Get(input).Any();
+
         public string[] Get(string serviceName)
         {
             string? pathVariable = Environment.GetEnvironmentVariable("PATH");
