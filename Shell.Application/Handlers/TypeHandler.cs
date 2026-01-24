@@ -35,9 +35,15 @@ namespace Shell.Application.Handlers
             foreach(var command in paths)
             {
                 if (_permissionService.HasExecutePermission(command))
+                {
                     context.Emit($"{commandName} is {command}");
+                    return;
+                }
                 else
+                { 
                     CommandNotFound(commandName, context);
+                    return;
+                }
             }
         }
 

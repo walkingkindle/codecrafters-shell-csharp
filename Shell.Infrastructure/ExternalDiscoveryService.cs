@@ -14,8 +14,9 @@ namespace Shell.Infrastructure
 
             foreach (var directory in directories)
             {
-                if(File.Exists(Path.Combine(directory, $"{serviceName}.exe")))
-                    results.Add(directory);
+                var path = Path.Combine(directory, serviceName);
+                if(File.Exists(path))
+                    results.Add(path);
             }
             return results.ToArray();
         }
