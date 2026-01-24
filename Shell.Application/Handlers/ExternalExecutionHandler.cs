@@ -15,11 +15,11 @@ namespace Shell.Application.Handlers
         {
             var path = _externalDiscoveryService.Get(command.Input).First();
 
-            var allArgs = new[] { command.Input }
-            .Concat(command.Arguments)
-            .ToArray();
+            //var allArgs = new[] { }
+            //.Concat(command.Arguments)
+            //.ToArray();
 
-            _starter.Start(path, allArgs);
+            _starter.Start(path, command.Arguments.ToArray());
             
         }
     }
