@@ -15,12 +15,7 @@ namespace Shell.Application.Handlers
         {
             var path = _externalDiscoveryService.Get(command.Input).First();
 
-            //var allArgs = new[] { }
-            //.Concat(command.Arguments)
-            //.ToArray();
-
             _starter.Start(Path.GetFileName(path), command.Arguments.ToArray());
-            
         }
     }
 }

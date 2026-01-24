@@ -5,6 +5,7 @@ using Shell.Application.Interpreters;
 using Shell.Application.Resolvers;
 using Shell.Domain.Abstracts;
 using Shell.Domain.Commands;
+using Shell.Domain.Commands.BuiltIn;
 using Shell.Infrastructure;
 using Shell.Output;
 using System.Runtime.CompilerServices;
@@ -14,6 +15,7 @@ builder.Logging.ClearProviders();
 builder.Services.AddSingleton<ICommandResolver, CommandResolver>();
 builder.Services.AddSingleton<ICommandInterpreter, CommandInterpreter>();
 builder.Services.AddSingleton<EnvironmentVariableParser>();
+builder.Services.AddTransient<PathReader>();
 
 
 AddBuiltInCommands(builder.Services);
@@ -23,6 +25,7 @@ static void AddBuiltInCommands(IServiceCollection services)
     services.AddSingleton<IBuiltInCommand, Echo>();
     services.AddSingleton<IBuiltInCommand, Exit>();
     services.AddSingleton<IBuiltInCommand, Shell.Domain.Commands.Type>();
+    services.AddSingleton<IBuiltInCommand, Pwd>();
 }
 
 AddHandlers(builder.Services);
@@ -52,6 +55,7 @@ static void AddHandlers(IServiceCollection services)
     services.AddSingleton<ICommandHandler, EchoHandler>();
     services.AddSingleton<ICommandHandler, TypeHandler>();
     services.AddSingleton<ICommandHandler,ExternalExecutionHandler>();
+    services.AddSingleton<ICommandHandler, PwdHandler>();
     //Register other handlers here yo
 
 
