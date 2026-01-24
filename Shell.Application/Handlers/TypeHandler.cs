@@ -39,12 +39,9 @@ namespace Shell.Application.Handlers
                     context.Emit($"{commandName} is {command}");
                     return;
                 }
-                else
-                { 
-                    CommandNotFound(commandName, context);
-                    return;
-                }
             }
+            CommandNotFound(commandName, context);
+            return;
         }
 
         private static void CommandNotFound(string commandName, ShellExecutionContext context)
