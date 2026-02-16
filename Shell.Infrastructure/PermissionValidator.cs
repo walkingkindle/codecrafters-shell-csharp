@@ -1,7 +1,4 @@
-﻿using System.Data;
-using System.Security.AccessControl;
-
-namespace Shell.Infrastructure
+﻿namespace Shell.Infrastructure
 {
     public class PermissionValidator
     {

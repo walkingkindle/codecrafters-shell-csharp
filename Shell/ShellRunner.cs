@@ -1,5 +1,6 @@
 using Shell.Application;
 using Shell.Domain.Abstracts;
+using Shell.Infrastructure;
 
 namespace Shell
 {
@@ -7,16 +8,18 @@ namespace Shell
     {
         private readonly Delegator _delegator;
         private readonly IOutputSink _outputSink;
+        private readonly PathReader _pathReader;
 
-        public ShellRunner(Delegator delegator, IOutputSink outputSink)
+        public ShellRunner(Delegator delegator, IOutputSink outputSink, PathReader pathReader)
         {
             _delegator = delegator;
             _outputSink = outputSink;
+            _pathReader = pathReader;
         }
 
         public void Run()
         {
-            var context = new ShellExecutionContext(_outputSink, true);
+            var context = new ShellExecutionContext(_outputSink, true, _pathReader.CurrentWorkingDirectory());
             while (context.IsRunning)
             {
                 Console.Write("$ ");       

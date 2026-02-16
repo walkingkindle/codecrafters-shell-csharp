@@ -16,6 +16,7 @@ builder.Services.AddSingleton<ICommandResolver, CommandResolver>();
 builder.Services.AddSingleton<ICommandInterpreter, CommandInterpreter>();
 builder.Services.AddSingleton<EnvironmentVariableParser>();
 builder.Services.AddTransient<PathReader>();
+builder.Services.AddTransient<PathSetter>();
 
 
 AddBuiltInCommands(builder.Services);
@@ -26,6 +27,9 @@ static void AddBuiltInCommands(IServiceCollection services)
     services.AddSingleton<IBuiltInCommand, Exit>();
     services.AddSingleton<IBuiltInCommand, Shell.Domain.Commands.Type>();
     services.AddSingleton<IBuiltInCommand, Pwd>();
+    services.AddSingleton<IBuiltInCommand, Clear>();
+
+    services.AddSingleton<IBuiltInCommand, Cd>();
 }
 
 AddHandlers(builder.Services);
@@ -56,6 +60,8 @@ static void AddHandlers(IServiceCollection services)
     services.AddSingleton<ICommandHandler, TypeHandler>();
     services.AddSingleton<ICommandHandler,ExternalExecutionHandler>();
     services.AddSingleton<ICommandHandler, PwdHandler>();
+    services.AddSingleton<ICommandHandler, CdHandler>();
+    services.AddSingleton<ICommandHandler, ClearHandler>();
     //Register other handlers here yo
 
 
