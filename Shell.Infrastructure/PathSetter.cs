@@ -14,8 +14,7 @@ namespace Shell.Infrastructure
         {
             if (IsHomeDirectory(directory))
             {
-                _pathReader.GetHomeDirectory();
-                return "";
+                directory = _pathReader.GetHomeDirectory();
             }
             try
             {
